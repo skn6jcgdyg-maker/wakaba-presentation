@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WAKABA｜児童発達支援 事業計画ダッシュボード 改訂版</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Kaku Gothic ProN','Yu Gothic',Meiryo,sans-serif;color:#17313e;background:#f3f7fa}
+*{box-sizing:border-box}body{margin:0}
+header{background:#123d4a;color:#fff;padding:24px max(18px,calc((100% - 1080px)/2))}
+header h1{margin:0 0 8px;font-size:24px} header p{margin:0;color:#d6e7e8;line-height:1.7;font-size:13px}
+.wrap{max-width:1080px;margin:auto;padding:22px 16px 90px}
+.nav{display:flex;gap:8px;overflow:auto;margin-bottom:16px}.nav a{background:#fff;border-radius:999px;padding:10px 14px;text-decoration:none;color:#215463;font-size:13px;font-weight:700;white-space:nowrap}
+.card{background:#fff;border:1px solid #dce6e9;border-radius:18px;padding:20px;margin:16px 0;box-shadow:0 3px 12px rgba(23,56,66,.06)}
+h2{margin:0 0 14px;font-size:19px;color:#153e4a} h3{font-size:15px;margin:16px 0 8px}
+.small{font-size:12px;color:#5b6b74;line-height:1.8}
+.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.metric{background:#eef5f6;border-radius:14px;padding:15px}.metric .k{font-size:12px;color:#566d77}.metric strong{display:block;font-size:23px;margin-top:8px;color:#165f67}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.control{margin:14px 0}.control label{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:14px;font-weight:700;margin-bottom:8px}
+.value{display:inline-block;min-width:72px;padding:4px 8px;border-radius:999px;background:#eef5f6;text-align:center;color:#165f67;font-weight:800}
+input[type=range]{width:100%;accent-color:#087c83}
+input[type=number]{width:100%;padding:11px 12px;border:1px solid #cfdde1;border-radius:10px;background:#fff;font-size:16px}
+.numgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.barline{margin:14px 0}.barhead{display:flex;justify-content:space-between;gap:8px;font-size:13px}.track{height:18px;background:#e7edef;border-radius:9px;overflow:hidden;margin-top:6px}.fill{height:100%;background:#1e8a8e;border-radius:9px}.fill.secondary{background:#e6a043}.fill.red{background:#cf6473}
+.pill{background:#edf4f4;border-radius:12px;padding:14px 15px;font-size:14px;margin-top:8px}.big{font-size:28px;font-weight:800;color:#0b7774}.negative{color:#b23e50}
+.formula{padding:12px;border-radius:10px;background:#f0f5f7;font-size:13px;line-height:1.9;margin-top:10px}
+.legend{display:flex;gap:14px;font-size:12px;margin:8px 0;color:#506670}.dot{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;background:#1e8a8e}.dot.orange{background:#e6a043}
+.warn{border-left:4px solid #e9aa50;background:#fff9ed;padding:12px 14px;border-radius:6px;font-size:13px;line-height:1.8}
+.btn{background:#136f75;border:0;color:#fff;border-radius:10px;padding:12px 16px;font-weight:700;cursor:pointer}
+svg{width:100%;height:auto;overflow:visible}
+footer{padding:24px 0;font-size:12px;color:#6a8088}
+@media(max-width:700px){.grid,.summary,.numgrid{grid-template-columns:1fr}.metric strong{font-size:20px}header h1{font-size:21px}.card{padding:16px}}
+@media print{body{background:#fff}.nav,.btn{display:none}.card{box-shadow:none;break-inside:avoid}.wrap{padding:5px}header{background:#fff;color:#000;padding:12px}header p{color:#333}}
+</style>
+</head>
+<body>
+<header>
+  <h1>WAKABA ｜児童発達支援 事業計画</h1>
+  <p>大南地区・多機能型と専用職員採用を比較するプレゼン用シミュレーション。<br>数字は仮定に基づく概算です。正式な請求単価や加算の取得を保証するものではありません。</p>
+</header>
+<div class="wrap">
+  <nav class="nav">
+    <a href="#overview">全体像</a><a href="#mixed">多機能型</a><a href="#profit">専用採用</a><a href="#staff">保育士・ST</a><a href="#contracts">必要契約数</a><a href="#risks">留意点</a>
+  </nav>
+
+  <section id="overview" class="card">
+    <h2>1｜計画の全体像</h2>
+    <div class="numgrid">
+      <div>
+        <label class="small" for="daycareUnit">放デイ単価（1人1日）</label>
+        <input id="daycareUnit" type="number" min="0" step="100" value="8500">
+      </div>
+      <div>
+        <label class="small" for="jihatsuUnit">児発単価（1人1日）</label>
+        <input id="jihatsuUnit" type="number" min="0" step="100" value="12000">
+      </div>
+    </div>
+    <div class="summary" style="margin-top:14px">
+      <div class="metric"><div class="k">放デイ単価</div><strong id="overviewDaycare">8,500円</strong></div>
+      <div class="metric"><div class="k">児発単価</div><strong id="overviewJihatsu">12,000円</strong></div>
+      <div class="metric"><div class="k">1人あたり差額</div><strong id="overviewGap">+3,500円</strong></div>
+      <div class="metric"><div class="k">児発専用採用の目標</div><strong>平均8人</strong></div>
+    </div>
+    <p class="small">A：放デイ枠を児発に振り替える多機能型（既存人件費は増えない仮定）。B：児発のために5〜6人を新規雇用する独立採算モデル。両者の数字を合算しないでください。</p>
+  </section>
+
+  <section id="mixed" class="card">
+    <h2>2｜多機能型：放デイ10人の枠を置き換える</h2>
+    <div class="grid">
+      <div>
+        <div class="control">
+          <label for="replace">児発に切り替える人数 <span class="value" id="replaceNum">5人</span></label>
+          <input id="replace" type="range" min="0" max="10" step="1" value="5">
+        </div>
+        <div class="control">
+          <label for="mixedDays">切り替える営業日数／月 <span class="value" id="mixedDaysNum">13日</span></label>
+          <input id="mixedDays" type="range" min="1" max="22" step="1" value="13">
+        </div>
+        <div class="control">
+          <label for="mixedCost">追加経費／月 <span class="value" id="mixedCostNum">10万円</span></label>
+          <input id="mixedCost" type="range" min="0" max="40" step="1" value="10">
+        </div>
+        <div class="formula" id="mixedFormula">単価差：12,000−8,500＝3,500円／人<br>売上増：3,500円×5人×13日＝227,500円<br>増益：22.75万円−10万円＝12.75万円</div>
+      </div>
+      <div>
+        <div id="mixedBars">
+          <div class="barline"><div class="barhead"><span>放デイ10人</span><b>110.5万円</b></div><div class="track"><div class="fill secondary" style="width:41%"></div></div></div>
+          <div class="barline"><div class="barhead"><span>放デイ5人＋児発5人</span><b>133.25万円</b></div><div class="track"><div class="fill" style="width:49%"></div></div></div>
+        </div>
+        <div class="pill">月間増収 <b class="big" id="mixedRevenue">+22.75万円</b></div>
+        <div class="pill">月間増益 <b class="big" id="mixedProfit">+12.75万円</b></div>
+      </div>
+    </div>
+    <p class="small">放デイ10人 → 放デイ（10−児発人数）人＋児発人数、の置換比較。増益は「増収−新規追加経費」。既存放デイの利用枠を減らした時の差分であり、施設全体の純利益ではありません。</p>
+  </section>
+
+  <section class="card">
+    <h2>3｜児発の人数別：月13日間の増収</h2>
+    <div id="replaceChart">
+      <div class="barline"><div class="barhead"><span>1人を児発に変更</span><b>4.55万円</b></div><div class="track"><div class="fill" style="width:14%"></div></div></div>
+      <div class="barline"><div class="barhead"><span>2人を児発に変更</span><b>9.1万円</b></div><div class="track"><div class="fill" style="width:29%"></div></div></div>
+      <div class="barline"><div class="barhead"><span>3人を児発に変更</span><b>13.65万円</b></div><div class="track"><div class="fill" style="width:43%"></div></div></div>
+      <div class="barline"><div class="barhead"><span>4人を児発に変更</span><b>18.2万円</b></div><div class="track"><div class="fill" style="width:58%"></div></div></div>
+      <div class="barline"><div class="barhead"><span>5人を児発に変更</span><b>22.75万円</b></div><div class="track"><div class="fill" style="width:72%"></div></div></div>
+      <div class="barline"><div class="barhead"><span>6人を児発に変更</span><b>27.3万円</b></div><div class="track"><div class="fill" style="width:87%"></div></div></div>
+      <div class="barline"><div class="barhead"><span>7人を児発に変更</span><b>31.85万円</b></div><div class="track"><div class="fill" style="width:100%"></div></div></div>
+    </div>
+    <p class="small">計算式： （児発単価 − 放デイ単価） × 児発に変更する人数 × 13日。上の単価入力を変えると、ブラウザ上ではこのグラフも更新されます。</p>
+  </section>
+
+  <section id="profit" class="card">
+    <h2>4｜児発専用職員を採用した場合：黒字になる人数</h2>
+    <div class="grid">
+      <div>
+        <div class="control"><label for="daily">1日平均利用児童 <span class="value" id="dailyNum">8人</span></label><input id="daily" type="range" min="1" max="10" step="1" value="8"></div>
+        <div class="control"><label for="dedDays">児発の営業日数／月 <span class="value" id="dedDaysNum">22日</span></label><input id="dedDays" type="range" min="10" max="26" step="1" value="22"></div>
+        <div class="control"><label for="sessions">専門的支援実施加算の月算定回数 <span class="value" id="sessionsNum">60回</span></label><input id="sessions" type="range" min="0" max="100" step="5" value="60"></div>
+        <div class="control"><label for="cost">その他経費／月 <span class="value" id="costNum">15万円</span></label><input id="cost" type="range" min="5" max="45" step="1" value="15"></div>
+      </div>
+      <div>
+        <div class="summary" style="grid-template-columns:1fr 1fr">
+          <div class="metric"><div class="k">職員5人の利益</div><strong id="fiveProfit">+52.38万円</strong></div>
+          <div class="metric"><div class="k">職員6人の利益</div><strong id="sixProfit">+25.93万円</strong></div>
+        </div>
+        <div class="formula" id="dedFormula">基本・体制系：(1226.9単位)×8人×22日×10円＝2,159,280円<br>専門的支援実施：150単位×60回×10円＝90,000円<br>総売上：224.93万円／月<br>5人経費：(137万円×1.15)＋15万円＝172.55万円<br>6人経費：(160万円×1.15)＋15万円＝199万円</div>
+      </div>
+    </div>
+    <h3>平均利用人数ごとの利益推移</h3>
+    <div class="legend"><span><i class="dot"></i>職員5人</span><span><i class="dot orange"></i>職員6人</span></div>
+    <div id="profitChart"></div>
+    <p class="small">単価算定は、基本報酬928単位×98.8%、加配187単位、専門的支援体制123単位、専門的支援実施150単位／回、1単位10円での仮試算。送迎・処遇改善・賞与・開設費は含みません。</p>
+  </section>
+
+  <section id="staff" class="card">
+    <h2>5｜経験保育士とST：給与・加算・差額</h2>
+    <div class="grid">
+      <div>
+        <div class="control"><label for="nurserySalary">経験5年以上の保育士 月給 <span class="value" id="nurserySalaryNum">28万円</span></label><input id="nurserySalary" type="range" min="23" max="35" step="1" value="28"></div>
+        <div class="control"><label for="stSalary">ST 月給 <span class="value" id="stSalaryNum">33万円</span></label><input id="stSalary" type="range" min="27" max="42" step="1" value="33"></div>
+        <p class="small">想定：平均8人×月22日、保育士の加配187単位、STの体制123単位、専門的支援実施は月60回。</p>
+      </div>
+      <div>
+        <div id="staffBars">
+          <div class="barline"><div class="barhead"><span>保育士・人件費（社保込み）</span><b>32.2万円</b></div><div class="track"><div class="fill secondary" style="width:64%"></div></div></div>
+          <div class="barline"><div class="barhead"><span>保育士・関連加算</span><b>32.91万円</b></div><div class="track"><div class="fill" style="width:66%"></div></div></div>
+          <div class="barline"><div class="barhead"><span>ST・人件費（社保込み）</span><b>37.95万円</b></div><div class="track"><div class="fill secondary" style="width:76%"></div></div></div>
+          <div class="barline"><div class="barhead"><span>ST・関連加算</span><b>30.65万円</b></div><div class="track"><div class="fill" style="width:61%"></div></div></div>
+        </div>
+        <div class="formula" id="staffFormula">保育士加算：187単位×8人×22日×10円＝32.91万円<br>ST関連加算：123単位×8人×22日×10円＋150単位×60回×10円＝30.65万円<br>保育士の差額：32.91万円−32.2万円＝+0.71万円<br>STの差額：30.65万円−37.95万円＝−7.3万円</div>
+      </div>
+    </div>
+    <div class="warn">加算収入は個々の職員への利益ではありません。基準人員に上乗せした配置や算定要件が必要で、給与に社会保険等の事業主負担（試算15%）が加わります。</div>
+  </section>
+
+  <section id="contracts" class="card">
+    <h2>6｜毎日8人を目指すのに必要な契約人数</h2>
+    <div class="grid">
+      <div>
+        <div class="control"><label for="target">目標平均利用人数 <span class="value" id="targetNum">8人</span></label><input id="target" type="range" min="3" max="10" step="1" value="8"></div>
+        <div class="control"><label for="freq">1人あたり週の利用回数 <span class="value" id="freqNum">2.5回</span></label><input id="freq" type="range" min="1" max="5" step="0.5" value="2.5"></div>
+        <div class="control"><label for="absence">欠席・未利用率（試算） <span class="value" id="absenceNum">10%</span></label><input id="absence" type="range" min="0" max="25" step="5" value="10"></div>
+      </div>
+      <div>
+        <div class="pill">必要契約児童数 <span class="big" id="required">18人</span></div>
+        <div class="formula" id="contractsFormula">8人×週5日÷週2.5回÷出席率90%＝18人（端数切上）</div>
+        <div id="contractBars">
+          <div class="barline"><div class="barhead"><span>週2回利用</span><b>23人</b></div><div class="track"><div class="fill" style="width:66%"></div></div></div>
+          <div class="barline"><div class="barhead"><span>週3回利用</span><b>15人</b></div><div class="track"><div class="fill" style="width:43%"></div></div></div>
+          <div class="barline"><div class="barhead"><span>週4回利用</span><b>12人</b></div><div class="track"><div class="fill" style="width:34%"></div></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="small">週5日営業を仮定。バーの数値は「必要契約児童数（人）」です。</p>
+  </section>
+
+  <section id="risks" class="card">
+    <h2>7｜実施前に確認すること</h2>
+    <div class="warn">① 多機能型の定員10人の扱いと、同じ日に午前児発・午後放デイを実施する場合の受入上限。<br>② 既存の児発の変更指定か新規指定か、報酬の特例の適用。<br>③ 現在の職員3人と児発管の勤務時間・資格・送迎時の配置。<br>④ 保育士の経験5年以上の証明、およびSTの上乗せ配置と各種加算の併算定可否。<br>⑤ 送迎・賞与・採用費・欠席・実際の地域区分単価を入れた最終損益。</div>
+    <p class="small">このページの数値は経営判断用の試算です。ChatGPTアプリ内のHTMLプレビューではスクリプトが動かない場合があります。その場合でも初期値は表示されます。単価やスライダーを動かすシミュレーションは、公開後のブラウザ表示で利用する想定です。</p>
+    <button class="btn" onclick="window.print()">印刷・PDF保存</button>
+  </section>
+
+  <footer>WAKABA 事業計画検討資料｜2026年10月作成 ・ ブラウザ内のみで計算</footer>
+</div>
+
+<script>
+const $=id=>document.getElementById(id);
+const num=id=>Number($(id).value);
+const fmt=x=>x.toLocaleString('ja-JP',{maximumFractionDigits:2});
+const man=x=>fmt(x)+'万円';
+const yen=x=>fmt(x)+'円';
+function bar(label,value,max,cls=''){const pct=max>0?Math.max(0,Math.min(100,value/max*100)):0;return `<div class="barline"><div class="barhead"><span>${label}</span><b>${man(value)}</b></div><div class="track"><div class="fill ${cls}" style="width:${pct}%"></div></div></div>`}
+function chartBars(el,records,max){$(el).innerHTML=records.map(r=>bar(r[0],r[1],max,r[2]||'')).join('')}
+function profitPlot(){
+  const five=[],six=[]; const max=120, min=-140;
+  const dedDays=num('dedDays'), sessions=num('sessions'), cost=num('cost');
+  for(let n=1;n<=10;n++){
+    const revenue=((928*0.988+187+123)*n*dedDays*10 + 150*sessions*10)/10000;
+    five.push(revenue-(137*1.15+cost));
+    six.push(revenue-(160*1.15+cost));
+  }
+  const width=680,height=278,left=56,right=12,top=20,bottom=38;
+  const xx=i=>left+i*(width-left-right)/9;
+  const yy=y=>top+(max-y)*(height-top-bottom)/(max-min);
+  const line=vals=>vals.map((z,i)=>(i?'L':'M')+xx(i).toFixed(1)+' '+yy(z).toFixed(1)).join(' ');
+  let s=`<svg viewBox="0 0 ${width} ${height}" aria-label="人数別損益グラフ">`;
+  for(const y of [-100,-50,0,50,100]){s+=`<line x1="${left}" x2="${width-right}" y1="${yy(y)}" y2="${yy(y)}" stroke="${y===0?'#74858c':'#e5ecef'}" stroke-width="${y===0?2:1}"/><text x="${left-8}" y="${yy(y)+4}" fill="#61737c" font-size="12" text-anchor="end">${y}</text>`}
+  for(let i=0;i<10;i++) s+=`<text x="${xx(i)}" y="${height-12}" text-anchor="middle" font-size="12" fill="#61737c">${i+1}人</text>`;
+  s+=`<path d="${line(five)}" fill="none" stroke="#1e8a8e" stroke-width="3"/><path d="${line(six)}" fill="none" stroke="#e6a043" stroke-width="3"/>`;
+  [five,six].forEach((arr,k)=>arr.forEach((z,i)=>s+=`<circle cx="${xx(i)}" cy="${yy(z)}" r="4" fill="${k?'#e6a043':'#1e8a8e'}"><title>${i+1}人：${man(z)}</title></circle>`));
+  s+='</svg>';
+  $('profitChart').innerHTML=s;
+}
+function update(){
+  const daycare=num('daycareUnit'), jihatsu=num('jihatsuUnit');
+  const gap=jihatsu-daycare;
+  $('overviewDaycare').textContent=yen(daycare);
+  $('overviewJihatsu').textContent=yen(jihatsu);
+  $('overviewGap').textContent=(gap>=0?'+':'')+yen(gap);
+
+  const rep=num('replace'), d=num('mixedDays'), add=num('mixedCost');
+  $('replaceNum').textContent=rep+'人'; $('mixedDaysNum').textContent=d+'日'; $('mixedCostNum').textContent=man(add);
+  const old=daycare*10*d/10000;
+  const now=(daycare*(10-rep)+jihatsu*rep)*d/10000;
+  const delta=now-old;
+  chartBars('mixedBars', [['放デイ10人',old,'secondary'], [`放デイ${10-rep}人＋児発${rep}人`,now]], Math.max(270, now));
+  $('mixedRevenue').textContent=(delta>=0?'+':'')+man(delta);
+  $('mixedProfit').textContent=((delta-add)>=0?'+':'')+man(delta-add);
+  $('mixedProfit').className='big '+((delta-add)<0?'negative':'');
+  $('mixedFormula').innerHTML=`単価差：${yen(jihatsu)}−${yen(daycare)}＝${yen(gap)}／人<br>売上増：${yen(gap)}×${rep}人×${d}日＝${yen(delta*10000)}<br>増益：${man(delta)}−${man(add)}＝${man(delta-add)}`;
+  const chart=[]; for(let i=1;i<=7;i++){chart.push([`${i}人を児発に変更`, gap*i*13/10000])}
+  chartBars('replaceChart', chart, Math.max(...chart.map(x=>x[1]),1));
+
+  const daily=num('daily'), dedDays=num('dedDays'), sess=num('sessions'), cost=num('cost');
+  $('dailyNum').textContent=daily+'人'; $('dedDaysNum').textContent=dedDays+'日'; $('sessionsNum').textContent=sess+'回'; $('costNum').textContent=man(cost);
+  const base=928*0.988+187+123;
+  const revenue=(base*daily*dedDays*10 + sess*150*10)/10000;
+  const c5=137*1.15 + cost, c6=160*1.15 + cost;
+  const p5=revenue-c5, p6=revenue-c6;
+  $('fiveProfit').textContent=(p5>=0?'+':'')+man(p5); $('sixProfit').textContent=(p6>=0?'+':'')+man(p6);
+  $('fiveProfit').style.color=p5<0?'#b23e50':'#185e66'; $('sixProfit').style.color=p6<0?'#b23e50':'#185e66';
+  $('dedFormula').innerHTML=`基本・体制系：(${base.toFixed(1)}単位)×${daily}人×${dedDays}日×10円＝${fmt(base*daily*dedDays*10)}円<br>専門的支援実施：150単位×${sess}回×10円＝${fmt(sess*150*10)}円<br>総売上：${man(revenue)}／月<br>5人経費：(137万円×1.15)＋${man(cost)}＝${man(c5)}<br>6人経費：(160万円×1.15)＋${man(cost)}＝${man(c6)}`;
+  profitPlot();
+
+  const ns=num('nurserySalary'), st=num('stSalary');
+  $('nurserySalaryNum').textContent=man(ns); $('stSalaryNum').textContent=man(st);
+  const na=187*8*22*10/10000;
+  const sta=(123*8*22*10 + 150*60*10)/10000;
+  chartBars('staffBars', [['保育士・人件費（社保込み）', ns*1.15, 'secondary'], ['保育士・関連加算', na], ['ST・人件費（社保込み）', st*1.15, 'secondary'], ['ST・関連加算', sta]], 50);
+  $('staffFormula').innerHTML=`保育士加算：187単位×8人×22日×10円＝${man(na)}<br>ST関連加算：123単位×8人×22日×10円＋150単位×60回×10円＝${man(sta)}<br>保育士の差額：${man(na)}−${man(ns*1.15)}＝${(na-ns*1.15>=0?'+':'')+man(na-ns*1.15)}<br>STの差額：${man(sta)}−${man(st*1.15)}＝${(sta-st*1.15>=0?'+':'')+man(sta-st*1.15)}`;
+
+  const tar=num('target'), freq=num('freq'), absence=num('absence');
+  $('targetNum').textContent=tar+'人'; $('freqNum').textContent=freq+'回'; $('absenceNum').textContent=absence+'%';
+  const req=Math.ceil(tar*5/freq/(1-absence/100));
+  $('required').textContent=req+'人';
+  $('contractsFormula').textContent=`${tar}人×週5日÷週${freq}回÷出席率${100-absence}%＝${req}人（端数切上）`;
+  const c2=Math.ceil(tar*5/2/(1-absence/100)), c3=Math.ceil(tar*5/3/(1-absence/100)), c4=Math.ceil(tar*5/4/(1-absence/100));
+  $('contractBars').innerHTML=[['週2回利用',c2],['週3回利用',c3],['週4回利用',c4]].map(r=>`<div class="barline"><div class="barhead"><span>${r[0]}</span><b>${r[1]}人</b></div><div class="track"><div class="fill" style="width:${r[1]/Math.max(c2,c3,c4,1)*100}%"></div></div></div>`).join('');
+}
+['daycareUnit','jihatsuUnit','replace','mixedDays','mixedCost','daily','dedDays','sessions','cost','nurserySalary','stSalary','target','freq','absence'].forEach(id=>$(id).addEventListener('input',update));
+update();
+</script>
+</body>
+</html>
